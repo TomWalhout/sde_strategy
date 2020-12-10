@@ -21,4 +21,9 @@ public class ShoppingCart extends ArrayList<Product> {
 
         return totalPrice;
     }
+
+    public double getNumberOfProducts() {
+        double number = this.size();
+        return number;
+    }
 }

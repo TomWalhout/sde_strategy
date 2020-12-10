@@ -9,8 +9,10 @@ public class DiscountCalculator {
     public void setChristmasEve(boolean christmasEve) {
         isChristmasEve = christmasEve;
     }
+    public void setBlackFriday(boolean blackFriday) { isBlackFriday = blackFriday; }
 
     private boolean isChristmasEve;
+    private boolean isBlackFriday;
 
     public DiscountCalculator(Customer customer) {
         this.customer = customer;
@@ -31,6 +33,18 @@ public class DiscountCalculator {
                 discount = .125;
             }
 
+        }
+
+        // On Black Friday, things go crazy. Every customer is awarded a discount equal to the number of products in their basket, up to 80% off!
+        else if (isBlackFriday) {
+            // if the index is more than 80, discount is 80%
+            double numOfProducts = customer.getCart().getNumberOfProducts();
+            if (numOfProducts > 80) {
+                discount = .80;
+            } else {
+                // Divide by 100 to convert to percentage
+                discount = numOfProducts / 100;
+            }
         }
 
         // Default situation: new customers full price, regular 15% off
